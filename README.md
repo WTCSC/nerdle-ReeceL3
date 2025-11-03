@@ -1,13 +1,103 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/Tm7PdKHd)
-[![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=20879339)
-<!-- 
-   Assignment Notes:
-   - To run the game, execute `python3 nerdle.py` in the terminal.
-   - Your task is to implement the equation generation functions in `equation_generator.py` and the solution validator in `game_engine.py`.
-   - Don't forget to import your modules.
-   - PAY ATTENTION TO THE TODO COMMENTS IN THE CODE.
-   - Each function has comments detailing its purpose and requirements.
-   - Code is automatically tested *every time* you push changes to GitHub.
--->
+# Nerdle - Math Equation Guessing Game
 
-# Nerdle
+Nerdle is a command-line game inspired by Wordle, where you guess 8-character mathematical equations instead of words. Sharpen your math skills while having fun trying to solve equations in limited attempts!
+
+---
+
+## Table of Contents
+
+- [Overview](#overview)  
+- [Gameplay](#gameplay)  
+- [Installation](#installation)  
+- [Running the Game](#running-the-game)  
+- [Game Structure](#game-structure)  
+- [Modules](#modules)  
+- [Contributing](#contributing)  
+- [License](#license)  
+
+---
+
+## Overview
+
+In Nerdle, the player attempts to guess a randomly generated math equation of the form:
+
+
+- Each equation is exactly 8 characters long.  
+- Players have **6 attempts** to guess the correct equation.  
+- Feedback is provided after each guess using color-coded hints:
+  - **Green**: Correct character in the correct position  
+  - **Yellow**: Correct character but in the wrong position  
+  - **Gray**: Character not in the equation  
+
+---
+
+## Gameplay
+
+1. Start the game, and a random equation is generated.  
+2. Enter guesses in the exact 8-character format (e.g., `12+34=46`).  
+3. After each guess, feedback will guide you:
+   - `G` (green) = correct position  
+   - `Y` (yellow) = correct character, wrong position  
+   - `B` (gray) = character not present  
+
+4. Continue guessing until you solve the equation or run out of attempts.  
+5. After the game ends, you can choose to play again.
+
+**Example:**
+
+Target equation: `12+34=46`  
+Guess: `15+35=50`  
+
+Feedback:
+
+
+---
+
+## Installation
+
+1. Ensure Python 3.7+ is installed on your system.  
+2. Clone this repository:
+
+```
+git clone https://github.com/yourusername/nerdle.git
+cd nerdle 
+```
+# How to run
+
+1. Open your terminal and type 
+```
+python nerdle.py
+```
+# Decision tree
+```
+                 ┌─────────────────────────────┐
+                 │ Start: Generate Equation     │
+                 └─────────────┬───────────────┘
+                               │
+                               ▼
+                  ┌─────────────────────────┐
+                  │ Choose Random Operation │
+                  └─────────┬───────────────┘
+                            │
+        ┌───────────┬───────┴───────┬───────────┐
+        ▼           ▼               ▼           ▼
+   Addition        Subtraction   Multiplication Division
+        │              │             │           │
+        ▼              ▼             ▼           ▼
+Generate num1, num2 Generate num1, num2  Generate num1,num2 Generate num1,num2
+and result         (num1>num2?)       and result   (num1*num2)
+        │              │             │           │
+        ▼              ▼             ▼           ▼
+  Equation =      Equation =     Equation =   Equation =
+  num1+num2=result num1-num2=res  num1*num2=res num1/num2=res
+        │              │             │           │
+        └─────┬────────┴─────────────┴───────────┘
+              │
+              ▼
+     Is equation 8 chars long?
+              │
+       ┌──────┴───────┐
+       │ Yes          │ No
+       ▼              ▼
+  Return Equation  Retry with new operation
+```
