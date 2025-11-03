@@ -15,24 +15,22 @@ import equation_generator
 # TODO: Implement the following functions #
 ###########################################
 
-def is_valid_guess(guess):
-    """
-    Check if a player's guess is valid for Nerdle.
-    
-    A valid guess must:
-    - Be exactly 8 characters long
-    - Only contain valid characters (digits, +, -, *, /, =)
-      - Hint: Use the get_valid_characters() function
-    - Be a mathematically correct equation
-      - Hint: Use the validate_equation() function from the equation_generator module
-    - Have exactly one equals sign
+from equation_generator import validate_equation
 
-    Args:
-        guess (str): The player's guess
-        
-    Returns:
-        bool: True if the guess is valid, False otherwise
-    """
+def is_valid_guess(guess):
+   for character in guess:
+        if character not in get_valid_characters():
+            return False
+  
+        if guess.count('=') != 1:
+            return False
+
+        if len(guess) == 8 and equation_generator.validate_equation(guess):
+            return True
+
+        return False
+
+  
 
 ################################################################################
 #  DO NOT EDIT BELOW THIS LINE, THESE FUNCTIONS ARE ALREADY COMPLETED FOR YOU  #

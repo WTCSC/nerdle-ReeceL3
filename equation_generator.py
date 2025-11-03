@@ -5,7 +5,7 @@ This module generates random math equations for the Nerdle game.
 It creates valid equations in the format: number operator number = result
 For example: 12+34=46 or 8*7=56
 """
-
+import random 
 ########################################
 # TODO: Import the appropriate modules #
 ########################################
@@ -15,51 +15,40 @@ For example: 12+34=46 or 8*7=56
 ###########################################
 
 def generate_numbers_for_addition():
-    """
-    Generate two numbers that when added create an 8-character equation.
-    Returns a tuple of (num1, num2, result)
-    
-    For addition, we want numbers that create 8 total characters
-    Format: NN+NN=NN (2+1+2+1+2 = 8 characters)
+    # Ensure two numbers that sum to a two-digit or three-digit number
+    num1 = random.randint(10, 50)
+    num2 = random.randint(10, 49)
+    result = num1 + num2
+    return (num1, num2, result)
 
-    Example: (12, 34, 46) creates "12+34=46"
-    """
 
 def generate_numbers_for_subtraction():
-    """
-    Generate two numbers that when subtracted create an 8-character equation.
-    Returns a tuple of (num1, num2, result)
-    
-    For subtraction, we want positive results only
-    Format: NN-NN=NN (2+1+2+1+2 = 8 characters)
+    # Ensure two-digit result
+    num1 = random.randint(20, 99)
+    num2 = random.randint(10, num1 - 10)  # ensure result >= 10
+    result = num1 - num2
+    return (num1, num2, result)
 
-    Example: (56, 23, 33) creates "56-23=33"
-    """
 
 def generate_numbers_for_multiplication():
-    """
-    Generate two numbers that when multiplied create an 8-character equation.
-    Returns a tuple of (num1, num2, result)
-    
-    For multiplication, we need exactly 8 characters
-    Format: N*NN=NNN (1+1+2+1+3 = 8 characters)
-    Single digit * two digit = three digit result
-    
-    Example: (3, 34, 102) creates "3*34=102" (8 characters)
-    """
+    # num1 = single-digit 2-9, num2 = 2-digit 13-99 to ensure result is 3 digits
+    num1 = random.randint(2, 9)
+    num2 = random.randint(13, 99)
+    result = num1 * num2
+    return (num1, num2, result)
+
 
 def generate_numbers_for_division():
-    """
-    Generate two numbers that when divided create an 8-character equation.
-    Returns a tuple of (num1, num2, result)
-    
-    For division, we want exact division (no remainders)
-    Format: NNN/NN=N (3+1+2+1+1 = 8 characters)
-    We need to work backwards: result * divisor = dividend
-
-    Example: (252, 36, 7) creates "252/36=7"
-    """
-    
+    # Ensure dividend is 3 digits, divisor 2 digits, quotient 1 digit
+    result = random.randint(2, 9)           # single-digit quotient
+    num2 = random.randint(12, 99)           # 2-digit divisor
+    num1 = result * num2                     # dividend
+    # Retry if num1 < 100 (not 3 digits)
+    while num1 < 100:
+        result = random.randint(2, 9)
+        num2 = random.randint(12, 99)
+        num1 = result * num2
+    return (num1, num2, result)
 ################################################################################
 #  DO NOT EDIT BELOW THIS LINE, THESE FUNCTIONS ARE ALREADY COMPLETED FOR YOU  #
 ################################################################################
