@@ -15,32 +15,40 @@ import random
 ###########################################
 
 def generate_numbers_for_addition():
-    num1 = random.randint(10,99)
-    num2 = random.randint(10,99)
+    # Ensure two numbers that sum to a two-digit or three-digit number
+    num1 = random.randint(10, 50)
+    num2 = random.randint(10, 49)
     result = num1 + num2
+    return (num1, num2, result)
 
-    return (num1,num2,result)
 
 def generate_numbers_for_subtraction():
-  num1 = random.randint(10,99)
-  num2 = random.randint(10,99)
-  if num1 > num2:
-    return (num1, num2, num1-num2)
-  else:
-      return (num2, num1, num2-num1)
+    # Ensure two-digit result
+    num1 = random.randint(20, 99)
+    num2 = random.randint(10, num1 - 10)  # ensure result >= 10
+    result = num1 - num2
+    return (num1, num2, result)
+
 
 def generate_numbers_for_multiplication():
-  num1 = random.randint(2,9)
-  num2 = random.randint(10,99)
-  result = num1 * num2
+    # num1 = single-digit 2-9, num2 = 2-digit 13-99 to ensure result is 3 digits
+    num1 = random.randint(2, 9)
+    num2 = random.randint(13, 99)
+    result = num1 * num2
+    return (num1, num2, result)
+
 
 def generate_numbers_for_division():
-    num1 = random.randint(50, 99)
-    num2 = random.randint(2, 9)
-    result = num1 * num2
-
-    return (result, num1, num2)
-    
+    # Ensure dividend is 3 digits, divisor 2 digits, quotient 1 digit
+    result = random.randint(2, 9)           # single-digit quotient
+    num2 = random.randint(12, 99)           # 2-digit divisor
+    num1 = result * num2                     # dividend
+    # Retry if num1 < 100 (not 3 digits)
+    while num1 < 100:
+        result = random.randint(2, 9)
+        num2 = random.randint(12, 99)
+        num1 = result * num2
+    return (num1, num2, result)
 ################################################################################
 #  DO NOT EDIT BELOW THIS LINE, THESE FUNCTIONS ARE ALREADY COMPLETED FOR YOU  #
 ################################################################################

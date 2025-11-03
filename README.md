@@ -10,10 +10,7 @@ Nerdle is a command-line game inspired by Wordle, where you guess 8-character ma
 - [Gameplay](#gameplay)  
 - [Installation](#installation)  
 - [Running the Game](#running-the-game)  
-- [Game Structure](#game-structure)  
-- [Modules](#modules)  
-- [Contributing](#contributing)  
-- [License](#license)  
+- [Decision tree](#game-structure)   
 
 ---
 
